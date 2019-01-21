@@ -46,6 +46,8 @@ function loadStateWindows(){
 }
 
 function loadStateDoors(){
+	
+	console.log("door");
 	getStateDoor("Door1");
 	getStateDoor("Door2");
 }
@@ -60,11 +62,11 @@ function loadStateSensor(){
 }
 
 function loadStateHeating(){
-	getStateHeating("Heating");
+	getStateHeating("Heating1");
 }
 
 function loadStateAlarm(){
-	getStateAlarm("Alarm");
+	getStateAlarm("Alarm1");
 }
 
 function getStateLight(id) {
@@ -99,6 +101,7 @@ function getStateDoor(id) {
 		dataType : "text",
 		success: function( data ) {
 			changeSwitch(id, data);
+			console.log(id);
 		}
 	});
 }
@@ -122,7 +125,7 @@ function getStateSensor(id) {
 		url: "http://localhost:8888/RestProject/webapi/myresources/sensor/"+id,
 		dataType : "text",
 		success: function( data ) {
-			changeSensorPanel(id, data);
+			changeSensorPanel(data);
 		}
 	});
 }
@@ -143,7 +146,7 @@ function getStateAlarm(id) {
 	$.ajax({
 		//envoi de la requête
 		method: "GET", 
-		url: "http://localhost:8888/RestProject/webapi/myresources/heating/"+id,
+		url: "http://localhost:8888/RestProject/webapi/myresources/alarm/"+id,
 		dataType : "text",
 		success: function( data ) {
 			changeAlarmPanel(data);
@@ -152,7 +155,7 @@ function getStateAlarm(id) {
 }
 
 function changeSwitch(id, data){
-	if(data == "off"){
+	if(data == "off" || data=="closed"){
 		if(id == "Light1"){
 			document.getElementById("l1").checked = false;
 			stateLight1 = false;
@@ -165,35 +168,35 @@ function changeSwitch(id, data){
 			document.getElementById("l3").checked = false;
 			stateLight3 = false;
 		}
-		else if (id == "Light4"){{
+		else if (id == "Light4"){
 			document.getElementById("l4").checked = false;
 			stateLight4 = false;
 		}
-		else if (id == "Door1"){{
+		else if (id == "Door1"){
 			document.getElementById("d1").checked = false;
 			stateDoor1 = false;
 		}
-		else if (id == "Door2"){{
+		else if (id == "Door2"){
 			document.getElementById("d2").checked = false;
 			stateDoor2 = false;
 		}
-		else if (id == "Window1"){{
+		else if (id == "Window1"){
 			document.getElementById("w1").checked = false;
 			stateWindow1 = false;
 		}
-		else if (id == "Window2"){{
+		else if (id == "Window2"){
 			document.getElementById("w2").checked = false;
 			stateWindow2 = false;
 		}
-		else if (id == "Window3"){{
+		else if (id == "Window3"){
 			document.getElementById("w3").checked = false;
 			stateWindow3 = false;
 		}
-		else if (id == "Window4"){{
+		else if (id == "Window4"){
 			document.getElementById("w4").checked = false;
 			stateWindow4 = false;
 		}
-		else if (id == "Heaging"){{
+		else if (id == "Heating1"){
 			document.getElementById("h1").checked = false;
 			heating = false;
 		}
@@ -216,33 +219,34 @@ function changeSwitch(id, data){
 			document.getElementById("l4").checked = true;
 			stateLight4 = true;
 		}	
-		else if (id == "Door1"){{
-			document.getElementById("d1").checked = false;
-			stateDoor1 = false;
+		else if (id == "Door1"){
+			document.getElementById("d1").checked = true;
+			stateDoor1 = true;
 		}
-		else if (id == "Door2"){{
-			document.getElementById("d2").checked = false;
-			stateDoor2 = false;
+		else if (id == "Door2"){
+			document.getElementById("d2").checked = true;
+			stateDoor2 = true;
 		}
-		else if (id == "Window1"){{
-			document.getElementById("w1").checked = false;
-			stateWindow1 = false;
+		else if (id == "Window1"){
+			document.getElementById("w1").checked = true;
+			stateWindow1 = true;
 		}
-		else if (id == "Window2"){{
-			document.getElementById("w2").checked = false;
-			stateWindow2 = false;
+		else if (id == "Window2"){
+			document.getElementById("w2").checked = true;
+			stateWindow2 = true;
 		}
-		else if (id == "Window3"){{
-			document.getElementById("w3").checked = false;
-			stateWindow3 = false;
+		else if (id == "Window3"){
+			document.getElementById("w3").checked = true;
+			stateWindow3 = true;
 		}
-		else if (id == "Window4"){{
-			document.getElementById("w4").checked = false;
-			stateWindow4 = false;
+		else if (id == "Window4"){
+			document.getElementById("w4").checked = true;
+			stateWindow4 = true;
 		}
-		else if (id == "Heaging"){{
-			document.getElementById("h1").checked = false;
-			heating = false;
+		else if (id == "Heating1"){
+			console.log("on");
+			document.getElementById("h1").checked = true;
+			heating = true;
 		}
 	}
 }
@@ -344,6 +348,7 @@ function changeStateDoor(id){
 		else{
 			closeDoor(id);
 			stateDoor1 = false;
+			console.log("close");
 		}
 	}
 	else{
@@ -365,7 +370,7 @@ function openDoor(id) {
 		url: "http://localhost:8888/RestProject/webapi/myresources/door/"+id+"/open",
 		dataType : "text",
 		success: function( data ) {
-			Console.log(data);
+			console.log(data);
 		}
 	});
 }
@@ -374,10 +379,10 @@ function closeDoor(id) {
 	$.ajax({
 		//envoi de la requête
 		method: "POST", 
-		url: "http://localhost:8888/RestProject/webapi/myresources/door/"+id+"/close",
+		url: "http://localhost:8888/RestProject/webapi/myresources/door/"+id+"/closed",
 		dataType : "text",
 		success: function( data ) {
-			Console.log(data);
+			console.log(data);
 		}
 	});
 }
@@ -434,7 +439,7 @@ function openWindow(id) {
 		url: "http://localhost:8888/RestProject/webapi/myresources/window/"+id+"/open",
 		dataType : "text",
 		success: function( data ) {
-			Console.log(data);
+			console.log(data);
 		}
 	});
 }
@@ -443,22 +448,22 @@ function closeWindow(id) {
 	$.ajax({
 		//envoi de la requête
 		method: "POST", 
-		url: "http://localhost:8888/RestProject/webapi/myresources/window/"+id+"/close",
+		url: "http://localhost:8888/RestProject/webapi/myresources/window/"+id+"/closed",
 		dataType : "text",
 		success: function( data ) {
-			Console.log(data);
+			console.log(data);
 		}
 	});
 }
 
 function changeStateHeating(id){
-	if(stateHeating == false){
+	if(heating == false){
 		turnOnHeating(id);
-		stateHeating = true;
+		heating = true;
 	}
 	else{
 		turnOffHeating(id);
-		stateHeating = false;
+		heating = false;
 	}
 	
 	
@@ -468,10 +473,10 @@ function turnOnHeating(id) {
 	$.ajax({
 		//envoi de la requête
 		method: "POST", 
-		url: "http://localhost:8888/RestProject/webapi/myresources/heating/"+id+"/on",
+		url: "http://localhost:8888/RestProject/webapi/myresources/light/"+id+"/on",
 		dataType : "text",
 		success: function( data ) {
-			Console.log(data);
+			console.log(data);
 		}
 	});
 }
@@ -480,10 +485,10 @@ function turnOffHeating(id) {
 	$.ajax({
 		//envoi de la requête
 		method: "POST", 
-		url: "http://localhost:8888/RestProject/webapi/myresources/heating/"+id+"/off",
+		url: "http://localhost:8888/RestProject/webapi/myresources/light/"+id+"/off",
 		dataType : "text",
 		success: function( data ) {
-			Console.log(data);
+			console.log(data);
 		}
 	});
 }
