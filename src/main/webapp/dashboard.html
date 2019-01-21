@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" media="all" href=".\CSS\style.css">
-<script src="./ajax/javaScript.js"></script>
+<script src="./ajax/script.java"></script>
 <script src="./ajax/jquery-3.3.1.js"></script>
 
 <style>
@@ -71,7 +71,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
       <div class="w3-container w3-red w3-padding-16">
         <div class="w3-left"><i class="fa fa-thermometer w3-xxxlarge"></i></div>
         <div class="w3-right">
-          <h3>52</h3>
+          <h3>19&#8451</h3>
         </div>
         <div class="w3-clear"></div>
         <h4>Internal Temp</h4>
@@ -81,7 +81,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
       <div class="w3-container w3-blue w3-padding-16">
         <div class="w3-left"><i class="fa fa-thermometer w3-xxxlarge"></i></div>
         <div class="w3-right">
-          <h3>99</h3>
+          <h3>23&#8451</h3>
         </div>
         <div class="w3-clear"></div>
         <h4>External Temp</h4>
@@ -91,7 +91,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
       <div class="w3-container w3-teal w3-padding-16">
         <div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div>
         <div class="w3-right">
-          <h3>23</h3>
+          <h3>On</h3>
         </div>
         <div class="w3-clear"></div>
         <h4>Presence Sensor</h4>
@@ -101,7 +101,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
       <div class="w3-container w3-orange w3-text-white w3-padding-16">
         <div class="w3-left"><i class="fa fa-warning w3-xxxlarge"></i></div>
         <div class="w3-right">
-          <h3>50</h3>
+          <h3>Off</h3>
         </div>
         <div class="w3-clear"></div>
         <h4>Alarm</h4>
@@ -116,57 +116,47 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
         <table class="w3-table w3-striped w3-white">
           <tr>
             <td><i class="fa fa-lightbulb-o w3-text-blue w3-large"></i></td>
-            <td id="demo">Light 1</td>
+            <td>Light 1</td>
             <td>
 				<label class="switch">
-				  <input type="checkbox">
-				  <span class="slider round" onclick="loadDoc()"></span>
+				  <input id="l1" type="checkbox">
+				  <span class="slider round checked" onclick="changeStateLight(light1)"></span>
 				</label>
 			</td>
           </tr>
           <tr>
-            <td><i class="fa fa-bell w3-text-red w3-large"></i></td>
-            <td>Database error.</td>
+            <td><i class="fa fa-lightbulb-o w3-text-blue w3-large"></i></td>
+            <td>Light 2</td>
             <td>
 				<label class="switch">
-				  <input type="checkbox">
-				  <span class="slider round"></span>
+				  <input id="l2" type="checkbox">
+				  <span class="slider round" onclick="changeStateLight(light2)"></span>
 				</label>
 			</td>
           </tr>
           <tr>
-            <td><i class="fa fa-users w3-text-yellow w3-large"></i></td>
-            <td>New record, over 40 users.</td>
+            <td><i class="fa fa-lightbulb-o w3-text-blue w3-large"></i></td>
+            <td >Light 3</td>
             <td>
 				<label class="switch">
-				  <input type="checkbox">
-				  <span class="slider round"></span>
+				  <input id="l3" type="checkbox">
+				  <span class="slider round" onclick="changeStateLight(light3)"></span>
 				</label>
 			</td>
           </tr>
           <tr>
-            <td><i class="fa fa-comment w3-text-red w3-large"></i></td>
-            <td>New comments.</td>
+            <td><i class="fa fa-lightbulb-o w3-text-blue w3-large"></i></td>
+            <td >Light 4</td>
             <td>
 				<label class="switch">
-				  <input type="checkbox">
-				  <span class="slider round"></span>
+				  <input id="l4" type="checkbox">
+				  <span class="slider round" onclick="changeStateLight(light4)"></span>
 				</label>
 			</td>
           </tr>
           <tr>
-            <td><i class="fa fa-bookmark w3-text-blue w3-large"></i></td>
-            <td>Check transactions.</td>
-            <td>
-				<label class="switch">
-				  <input type="checkbox">
-				  <span class="slider round"></span>
-				</label>
-			</td>
-          </tr>
-          <tr>
-            <td><i class="fa fa-laptop w3-text-red w3-large"></i></td>
-            <td>CPU overload.</td>
+            <td><i class="fa fa-door-closed w3-text-blue w3-large"></i></td>
+            <td>Door 1</td>
             <td>
 				<label class="switch">
 				  <input type="checkbox">
@@ -175,8 +165,48 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 			</td>
           </tr>
           <tr>
-            <td><i class="fa fa-share-alt w3-text-green w3-large"></i></td>
-            <td>New shares.</td>
+            <td><i class="fa fa-door w3-text-red w3-large"></i></td>
+            <td>Door 2</td>
+            <td>
+				<label class="switch">
+				  <input type="checkbox">
+				  <span class="slider round"></span>
+				</label>
+			</td>
+          </tr>
+          <tr>
+            <td><i class="fa fa-film w3-text-black w3-large"></i></td>
+            <td>Window 1</td>
+            <td>
+				<label class="switch">
+				  <input type="checkbox">
+				  <span class="slider round"></span>
+				</label>
+			</td>
+          </tr>
+		  <tr>
+            <td><i class="fa fa-film w3-text-black w3-large"></i></td>
+            <td>Window 2</td>
+            <td>
+				<label class="switch">
+				  <input type="checkbox">
+				  <span class="slider round"></span>
+				</label>
+			</td>
+          </tr>
+		  <tr>
+            <td><i class="fa fa-film w3-text-green w3-large"></i></td>
+            <td>Window 3</td>
+            <td>
+				<label class="switch">
+				  <input type="checkbox">
+				  <span class="slider round"></span>
+				</label>
+			</td>
+          </tr>
+		  <tr>
+            <td><i class="fa fa-film w3-text-green w3-large"></i></td>
+            <td>Window 4</td>
             <td>
 				<label class="switch">
 				  <input type="checkbox">
@@ -298,6 +328,10 @@ function w3_close() {
   mySidebar.style.display = "none";
   overlayBg.style.display = "none";
 }
+
+window.onload = function() {
+  loadStateLights();
+};
 </script>
 
 </body>
