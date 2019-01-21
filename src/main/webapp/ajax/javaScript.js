@@ -6,35 +6,36 @@ var stateLight4;
 
 
 function loadStateLights(){
-	getState("light1");
-	getState("light2");
-	getState("light3");
-	getState("light4");
+	getState("Light1");
+	getState("Light2");
+	getState("Light3");
+	getState("Light4");
 }
 
 function getState(id) {
 	$.ajax({
 		//envoi de la requête
 		method: "GET", 
-		url: "http://localhost:8888/RestProject/webapi/myresources/services/light/"+id,
+		url: "http://localhost:8888/RestProject/webapi/myresources/light/"+id,
 		dataType : "text",
 		success: function( data ) {
+			console.log(data);
 			changeSwitch(id, data);
 		}
 	});
 }
 
-function changeSwitch(id){
+function changeSwitch(id, data){
 	if(data == "off"){
-		if(id == "light1"){
+		if(id == "Light1"){
 			document.getElementById("l1").checked = false;
 			stateLight1 = false;
 		}
-		else if (id == "light2"){
+		else if (id == "Light2"){
 			document.getElementById("l2").checked = false;
 			stateLight2 = false;			
 		}
-		else if (id == "light3"){
+		else if (id == "Light3"){
 			document.getElementById("l3").checked = false;
 			stateLight3 = false;
 		}
@@ -44,15 +45,15 @@ function changeSwitch(id){
 		}
 	}
 	else{
-		if(id == "light1"){
+		if(id == "Light1"){
 			document.getElementById("l1").checked = true;
 			stateLight1 = true;
 		}
-		else if (id == "light2"){
+		else if (id == "Light2"){
 			document.getElementById("l2").checked = true;
 			stateLight2 = true;			
 		}
-		else if (id == "light3"){
+		else if (id == "Light3"){
 			document.getElementById("l3").checked = true;
 			stateLight3 = true;
 		}
@@ -64,7 +65,7 @@ function changeSwitch(id){
 }
 
 function changeStateLight(id){
-	if(id == "light1"){
+	if(id == "Light1"){
 		if(stateLight1 == false){
 			turnOn(id);
 			stateLight1 = true;
@@ -74,7 +75,7 @@ function changeStateLight(id){
 			stateLight1 = false;
 		}
 	}
-	else if (id == "light2"){
+	else if (id == "Light2"){
 		if(stateLight1 == false){
 			turnOn(id);
 			stateLight2 = true;
@@ -84,7 +85,7 @@ function changeStateLight(id){
 			stateLight2 = false;
 		}		
 	}
-	else if (id == "light3"){
+	else if (id == "Light3"){
 		if(stateLight1 == false){
 			turnOn(id);
 			stateLight3 = true;
